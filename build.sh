@@ -27,7 +27,7 @@ setup(){
     mkdir -pv ${livecd} ${base} ${iso} ${software} ${base} ${release} ${cdroot}
 
     # Create and mount pool
-    zpool create potabi /dev/{device}
+    zpool create potabi /dev/${device}
     zfs set mountpoint=${release} potabi 
     zfs set compression=gzip-6 potabi
 }

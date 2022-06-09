@@ -60,8 +60,7 @@ touch ${install}/etc/fstab
 touch ${install}/etc/resolv.conf
 
 # Sendmail
-chroot ${install} cd /etc/mail
-chroot ${install} make install
+chroot ${install} `cd /etc/mail && make install`
 chroot ${install} service sendmail onerestart
 
 # Timezone

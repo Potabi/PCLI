@@ -64,8 +64,8 @@ build(){
     umount ${release}/var/cache/pkg
 
     # Move source files
-    cp ${base}/base.txz ${release}/usr/local/potabi/base.txz
-    cp ${base}/kernel.txz ${release}/usr/local/potabi/kernel.txz
+    cp /usr/local/potabi/base.txz ${release}/usr/local/potabi/base.txz
+    cp /usr/local/potabi/kernel.txz ${release}/usr/local/potabi/kernel.txz
     
     # rc
     . ${srcdir}/setuprc.sh

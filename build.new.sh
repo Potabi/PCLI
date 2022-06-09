@@ -16,13 +16,15 @@ build () {
     # Replace existing drive
     gpart destroy -F ${device}
     gpart create -s gpt ${device}
+    gpart add -t freebsd-boot -s 128k -l boot ${device}
+    gpart add -t freebsd-zfs -l system ${device}
     gpart bootcode -b /boot/pmbr -p /boot/gptzfsboot -i 1 ${device}
     
     # Create mountpoint
     mkdir -pv ${install}
 
     # Create Zpool and mount
-    zpool create -fm ${install} zroot /dev/${device}
+    zpool create -fm ${install} zroot /dev/${device}p2
     zpool set bootfs=zroot zroot
     zfs set checksum=fletcher4 zroot
     zfs set atime=off zroot
@@ -48,8 +50,19 @@ build () {
     chroot ${install} echo "ifconfig_re0=\"DHCP\"" >> /etc/rc.conf
     chroot ${install} echo "zfs_load=\"YES\"" >> /boot/loader.conf
     chroot ${install} echo "zfs.root.mountfrom=\"zfs:zroot\"" >> /boot/loader.conf
+    chroot ${install} ok unload
+    chroot ${install} ok load /boot/kernel/kernel
+    chroot ${install} ok load /boot/kernel/opensolaris.ko
+    chroot ${install} ok load /boot/kernel/zfs.ko
+    chroot ${install} ok set currdev="disk1p2"
+    chroot ${install} ok set vfs.root.mountfrom="zfs:zroot"
     touch ${install}/etc/fstab
     touch ${install}/etc/resolv.conf
+
+    # Sendmail
+    chroot ${install} cd /etc/mail
+    chroot ${install} make install
+    chroot ${install} service sendmail onerestart
 
     # Timezone
     # skipped for now

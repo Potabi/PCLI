@@ -20,6 +20,7 @@ cleanup(){
     mdconfig -d -u 0 || true
     rm -rf ${livecd}/pool.img || true
     rm -rf ${livecd} || true
+    zpool destroy potabi || true
 }
 
 setup(){

@@ -27,18 +27,9 @@ setup(){
     mkdir -pv ${livecd} ${base} ${iso} ${software} ${base} ${release} ${cdroot}
 
     # Create and mount pool
-    truncate -s 6g ${livecd}/pool.img
-    mdconfig -a -t vnode -f ${livecd}/pool.img -u 0
-    zpool create potabi /dev/md0
+    zpool create potabi /dev/{device}
     zfs set mountpoint=${release} potabi 
     zfs set compression=gzip-6 potabi
-
-    # UFS alternative code (just in case)
-    # gpart create -s GPT md0
-    # gpart add -t freebsd-ufs md0
-    # bsdlabel -w md0 auto
-    # newfs -U md0a
-    # mount /dev/md0a ${release}
 }
 
 build(){
@@ -48,10 +39,8 @@ build(){
     # Add and extract base/kernel into ${release}
     cd ${base}
     # TODO: Switch with CoreNGS release
-    fetch https://github.com/Potabi/release/releases/download/${basev}-base/base.txz
-    fetch https://github.com/Potabi/release/releases/download/${basev}-base/kernel.txz
-    tar -zxvf base.txz -C ${release}
-    tar -zxvf kernel.txz -C ${release}
+    tar -zxvf /usr/local/potabi/base.txz -C ${release}
+    tar -zxvf /usr/local/potabi/kernel.txz -C ${release}
 
     # Add base items
     touch ${release}/etc/fstab
@@ -144,15 +133,6 @@ build(){
     cd ${prjdir} && zpool export potabi && while zpool status potabi >/dev/null; do :; done 2>/dev/null
 }
 
-image(){
-    cd ${prjdir}
-    sh ${mkidir}/mkiso.${platform}.sh -b ${label} ${isopath} ${cdroot}
-    cd ${iso}
-    echo "Build completed"
-    dd if=${isopath} of=/dev/${device}
-}
-
 cleanup
 setup
 build
-image

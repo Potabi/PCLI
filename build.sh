@@ -122,7 +122,7 @@ build(){
     install -o root -g wheel -m 755 -d "${cdroot}"
     mkdir -pv "${cdroot}/data"
     zfs snapshot potabi@clean
-    zfs send -c -e potabi@clean | dd of=/usr/local/potabi-build/cdroot/data/system.img status=progress bs=1M
+    zfs send -c -e potabi@clean | dd of=/dev/${device} status=progress bs=1M
 
     # Boot
     cd ${release}

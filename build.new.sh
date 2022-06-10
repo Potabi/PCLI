@@ -19,7 +19,7 @@ export hostname="experimental"
 zpool destroy -f zroot || true
 gpart destroy -F ${device}
 gpart create -s gpt ${device}
-gpart add -t freebsd-boot -s 128k -l boot ${device}
+gpart add -t freebsd-boot -s 500k -l boot ${device}
 gpart add -t freebsd-zfs -l system ${device}
 gpart bootcode -b /boot/pmbr -p /boot/gptzfsboot -i 1 ${device}
 

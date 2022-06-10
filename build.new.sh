@@ -54,6 +54,7 @@ ls ${install}
 chroot ${install} echo "hostname=\"${hostname}\"" >> /etc/rc.conf
 chroot ${install} echo "zfs_enable=\"YES\"" >> /etc/rc.conf
 chroot ${install} echo "ifconfig_re0=\"DHCP\"" >> /etc/rc.conf
+chroot ${install} echo "opensolaris_load=\"YES\"" >> /boot/loader.conf
 chroot ${install} echo "zfs_load=\"YES\"" >> /boot/loader.conf
 chroot ${install} echo "zfs.root.mountfrom=\"zfs:zroot\"" >> /boot/loader.conf
 # chroot ${install} ok unload

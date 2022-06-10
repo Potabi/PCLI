@@ -70,7 +70,7 @@ touch ${install}/etc/resolv.conf
 
 # Create entropy / Extra config
 chroot ${install} touch /boot/entropy
-chroot ${install} echo "gop set 0" >> ${release}/boot/loader.rc.local
+chroot ${install} echo "gop set 0" >> ${install}/boot/loader.rc.local
 
 # Move zpool mountpoint
 zfs set mountpoint=legacy zroot
@@ -78,6 +78,12 @@ zfs set mountpoint=/home zroot/home
 zfs set mountpoint=/tmp zroot/tmp
 zfs set mountpoint=/usr zroot/usr
 zfs set mountpoint=/var zroot/var
+
+zpool import -f -o cachefile=/tmp/zpool.cache -o altroot=${install} zroot || true
+cp /tmp/zpool.cache ${install}/boot/zfs/zpool.cache || true
+zpool export zroot
+zpool import zroot
+
 # }
 
 # build

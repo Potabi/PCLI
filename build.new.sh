@@ -68,16 +68,16 @@ touch ${install}/etc/resolv.conf
 # Timezone
 # skipped for now
 
+# Create entropy / Extra config
+chroot ${install} touch /boot/entropy
+chroot ${install} echo "gop set 0" >> ${release}/boot/loader.rc.local
+
 # Move zpool mountpoint
 zfs set mountpoint=legacy zroot
 zfs set mountpoint=/home zroot/home
 zfs set mountpoint=/tmp zroot/tmp
 zfs set mountpoint=/usr zroot/usr
 zfs set mountpoint=/var zroot/var
-
-# Create entropy / Extra config
-chroot ${install} touch /boot/entropy
-chroot ${install} echo "gop set 0" >> ${release}/boot/loader.rc.local
 # }
 
 # build

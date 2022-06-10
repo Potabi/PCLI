@@ -17,6 +17,7 @@ export hostname="experimental"
 # build () {
 # Replace existing drive
 zpool destroy -f zroot || true
+rm -rf ${install} || true
 gpart destroy -F ${device}
 gpart create -s gpt ${device}
 gpart add -t freebsd-boot -s 500k -l boot ${device}

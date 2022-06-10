@@ -61,10 +61,6 @@ chroot ${install} ok set vfs.root.mountfrom="zfs:zroot"
 touch ${install}/etc/fstab
 touch ${install}/etc/resolv.conf
 
-# Sendmail
-chroot ${install} `cd /etc/mail && make install`
-chroot ${install} service sendmail onerestart
-
 # Timezone
 # skipped for now
 

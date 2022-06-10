@@ -32,7 +32,7 @@ zpool create -fm ${install} zroot /dev/${device}p2
 zpool set bootfs=zroot zroot
 zfs set checksum=fletcher4 zroot
 zfs set atime=off zroot
-zfs set compression=gzip-6 zroot
+zfs set compression=lz4 zroot
 
 # ZFS Create
 zfs create -o exec=on -o setuid=off zroot/tmp

@@ -6,6 +6,8 @@
 # pick the best ones, and finally modify it to install a fully
 # functional Potabi system.
 
+set -e # Kill on error
+
 # Temporary configs
 export device="ada0"
 export devdrive="/dev/${device}"

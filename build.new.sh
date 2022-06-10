@@ -48,6 +48,8 @@ chmod 1777 ${install}/var/tmp
 tar -zxvf /usr/local/potabi/base.txz -C ${install}
 tar -zxvf /usr/local/potabi/kernel.txz -C ${install}
 
+ls ${install}
+
 # Add base items
 chroot ${install} echo "hostname=\"${hostname}\"" >> /etc/rc.conf
 chroot ${install} echo "zfs_enable=\"YES\"" >> /etc/rc.conf

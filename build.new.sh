@@ -77,6 +77,7 @@ chroot ${install} echo "gop set 0" >> ${install}/boot/loader.rc.local
 chroot ${install} echo "/dev/gpt/POTABI / zfs rw,noatime 0 0" > /etc/fstab
 
 # Move zpool mountpoint
+zfs unmount -a
 zfs set mountpoint=legacy zroot
 zfs set mountpoint=/home zroot/home
 zfs set mountpoint=/tmp zroot/tmp

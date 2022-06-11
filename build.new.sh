@@ -74,7 +74,7 @@ gpart modify -i 1 -l "BOOT" ${device}
 gpart modify -i 2 -l "POTABI" ${device}
 chroot ${install} touch /boot/entropy
 chroot ${install} echo "gop set 0" >> ${install}/boot/loader.rc.local
-chroot ${install} echo "/dev/gpt/POTABI / zfs rw,noatime 0 0" > /etc/fstab
+chroot ${install} echo "zroot / zfs rw,noatime 0 0" > /etc/fstab
 
 # Move zpool mountpoint
 zfs set mountpoint=legacy zroot

@@ -81,6 +81,7 @@ zfs set mountpoint=/usr zroot/usr
 zfs set mountpoint=/var zroot/var
 
 # Final steps
+gpart modify -i 1 -l "BOOT" ${device}
 gpart modify -i 2 -l "POTABI" ${device}
 zpool import -f -o cachefile=/tmp/zpool.cache -o altroot=${install} zroot || true
 cp /tmp/zpool.cache ${install}/boot/zfs/zpool.cache || true

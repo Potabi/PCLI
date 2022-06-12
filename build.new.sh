@@ -59,6 +59,7 @@ chroot ${install} echo "ifconfig_re0=\"DHCP\"" >> /etc/rc.conf
 echo "opensolaris_load=\"YES\"" >> ${install}/boot/loader.conf
 echo "zfs_load=\"YES\"" >> ${install}/boot/loader.conf
 echo "zfs.root.mountfrom=\"zfs:gpt/POTABI\"" >> ${install}/boot/loader.conf
+echo "Displaying loader.conf and rc.conf"
 cat ${install}/boot/loader.conf
 cat ${install}/etc/rc.conf
 # chroot ${install} ok unload

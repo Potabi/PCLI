@@ -51,6 +51,8 @@ tar -zxvf /usr/local/potabi/kernel.txz -C ${install}
 ls ${install}
 
 # Add base items
+touch ${install}/etc/rc.conf 
+touch ${install}/boot/loader.conf
 chroot ${install} echo "hostname=\"${hostname}\"" >> /etc/rc.conf
 chroot ${install} echo "zfs_enable=\"YES\"" >> /etc/rc.conf
 chroot ${install} echo "ifconfig_re0=\"DHCP\"" >> /etc/rc.conf

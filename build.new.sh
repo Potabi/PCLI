@@ -53,9 +53,10 @@ ls ${install}
 # Add base items
 touch ${install}/etc/rc.conf 
 touch ${install}/boot/loader.conf
-chroot ${install} echo "hostname=\"${hostname}\"" >> /etc/rc.conf
-chroot ${install} echo "zfs_enable=\"YES\"" >> /etc/rc.conf
-chroot ${install} echo "ifconfig_re0=\"DHCP\"" >> /etc/rc.conf
+echo "hostname=\"${hostname}\"" >> ${install}/etc/rc.conf
+echo "zfs_enable=\"YES\"" >> ${install}/etc/rc.conf
+echo "ifconfig_re0=\"DHCP\"" >> ${install}/etc/rc.conf
+echo "sendmail_enable=\"NONE\"" >> ${install}/etc/rc.conf
 echo "opensolaris_load=\"YES\"" >> ${install}/boot/loader.conf
 echo "zfs_load=\"YES\"" >> ${install}/boot/loader.conf
 echo "zfs.root.mountfrom=\"zfs:gpt/POTABI\"" >> ${install}/boot/loader.conf
@@ -73,6 +74,9 @@ touch ${install}/etc/resolv.conf
 
 # Timezone
 # skipped for now
+
+# Sendmail 
+chroot ${install} echo "`cd /etc/mail && make aliases`"
 
 # Create entropy / Extra config
 gpart modify -i 1 -l "BOOT" ${device}

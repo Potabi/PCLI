@@ -14,7 +14,6 @@ export devdrive="/dev/${device}"
 export install="/tmp/pool"
 export hostname="experimental"
 
-# build () {
 # Replace existing drive
 zpool destroy -f zroot || true
 rm -rf ${install} || true
@@ -48,8 +47,6 @@ chmod 1777 ${install}/var/tmp
 tar -zxvf /usr/local/potabi/base.txz -C ${install}
 tar -zxvf /usr/local/potabi/kernel.txz -C ${install}
 
-ls ${install}
-
 # Add base items
 touch ${install}/etc/rc.conf 
 touch ${install}/boot/loader.conf
@@ -63,12 +60,6 @@ echo "zfs.root.mountfrom=\"zfs:gpt/POTABI\"" >> ${install}/boot/loader.conf
 echo "Displaying loader.conf and rc.conf"
 cat ${install}/boot/loader.conf
 cat ${install}/etc/rc.conf
-# chroot ${install} ok unload
-# chroot ${install} ok load /boot/kernel/kernel
-# chroot ${install} ok load /boot/kernel/opensolaris.ko
-# chroot ${install} ok load /boot/kernel/zfs.ko
-# chroot ${install} ok set currdev="${device}p2"
-# chroot ${install} ok set vfs.root.mountfrom="zfs:zroot"
 touch ${install}/etc/fstab
 touch ${install}/etc/resolv.conf
 
@@ -77,6 +68,8 @@ touch ${install}/etc/resolv.conf
 
 # Sendmail 
 chroot ${install} echo "`cd /etc/mail && make aliases`"
+
+# Packages
 
 # Create entropy / Extra config
 gpart modify -i 1 -l "BOOT" ${device}
@@ -98,7 +91,3 @@ zpool import -f -o cachefile=/tmp/zpool.cache -o altroot=${install} zroot || tru
 cp /tmp/zpool.cache ${install}/boot/zfs/zpool.cache || true
 zpool export zroot
 zpool import zroot
-
-# }
-
-# build

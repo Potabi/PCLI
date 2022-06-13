@@ -77,7 +77,6 @@ chroot ${install} echo "`cd /etc/mail && make aliases`"
 
 # Packages
 mkdir -pv ${install}/var/cache/pkg
-mount_nullfs ${software} ${install}/var/cache/pkg
 mount -t devfs devfs ${install}/dev
 cat ${pkgdir}/${tag}.${desktop}.${platform} | xargs pkg -c ${install} install -y
 chroot ${install} pkg install -y pkg

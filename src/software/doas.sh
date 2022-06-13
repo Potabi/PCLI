@@ -1,9 +1,9 @@
 install_doas(){
-    mkdir -pv ${release}/usr/local/etc
-    touch ${release}/usr/local/etc/doas.conf
-    echo "permit nopass keepenv :wheel" >> ${release}/usr/local/etc/doas.conf
-    echo "permit nopass keepenv root as root" >> ${release}/usr/local/etc/doas.conf
-    ln ${release}/usr/local/bin/doas ${release}/usr/local/bin/sudo
-    ln ${release}/usr/local/bin/doas ${release}/usr/local/bin/admin
-    ln ${release}/usr/local/bin/doas ${release}/usr/local/bin/root
+    mkdir -pv ${install}/usr/local/etc
+    touch ${install}/usr/local/etc/doas.conf
+    echo "permit nopass keepenv :wheel" >> ${install}/usr/local/etc/doas.conf
+    echo "permit nopass keepenv root as root" >> ${install}/usr/local/etc/doas.conf
+    ln ${install}/usr/local/bin/doas ${install}/usr/local/bin/sudo
+    ln ${install}/usr/local/bin/doas ${install}/usr/local/bin/admin
+    ln ${install}/usr/local/bin/doas ${install}/usr/local/bin/root
 }

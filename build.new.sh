@@ -14,6 +14,12 @@ export devdrive="/dev/${device}"
 export install="/tmp/pool"
 export hostname="experimental"
 
+export cwd="`realpath | sed 's|/scripts||g'`"
+
+. ${cwd}/conf/build.conf
+. ${cwd}/conf/general.conf
+. ${cwd}/conf/install.conf
+
 # Replace existing drive
 zpool destroy -f zroot || true
 rm -rf ${install} || true
@@ -70,6 +76,22 @@ touch ${install}/etc/resolv.conf
 chroot ${install} echo "`cd /etc/mail && make aliases`"
 
 # Packages
+mkdir -pv ${install}/var/cache/pkg
+mount_nullfs ${software} ${install}/var/cache/pkg
+mount -t devfs devfs ${install}/dev
+cat ${pkgdir}/${tag}.${desktop}.${platform} | xargs pkg -c ${install} install -y
+chroot ${install} pkg install -y pkg
+echo "exec ck-launch-session start-lumina-desktop" >> ${install}/usr/home/${liveuser}/.xinitrc
+echo "exec ck-launch-session start-lumina-desktop" >> ${install}/root/.xinitrc
+echo "Unmounting ${install}/dev - this could take up to 60 seconds"
+umount ${install}/dev || true
+timer=0
+while [ "$timer" -lt 5000000 ]; do
+    timer=$(($timer+1))
+done
+umount -f ${install}/dev || true
+. ${srcdir}/software.sh 
+setup_software
 
 # Create entropy / Extra config
 gpart modify -i 1 -l "BOOT" ${device}

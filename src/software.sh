@@ -7,7 +7,7 @@
 . ${sftdir}/ptbinst.sh
 
 setup_software(){
-    mkdir -pv ${release}/usr/local/tmp # This is where many things to go get tested for compile
+    mkdir -pv ${install}/usr/local/tmp # This is where many things to go get tested for compile
     # install_potabi-welcome
     install_ayras
     install_vlang

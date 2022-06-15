@@ -52,18 +52,18 @@ chmod 1777 ${install}/var/tmp
 # Extract base/kernel tars
 tar -zxvf /usr/local/potabi/base.txz -C ${install}
 tar -zxvf /usr/local/potabi/kernel.txz -C ${install}
-cp -vrf /usr/ ${install}/usr
-cp -vrf /bin/ ${install}/bin 
-cp -vrf /etc/ ${install}/etc
-cp -vrf /lib/ ${install}/lib
-cp -vrf /libexec/ ${install}/libexec
-cp -vrf /media/ ${install}/media 
-cp -vrf /root/ ${install}/root
-cp -vrf /sbin/ ${install}/sbin 
-cp -vrf /sys/ ${install}/sys 
-cp -vrf /usr/ ${install}/usr
-cp -vrf /bin/ ${install}/bin 
-cp -vrf /var/ ${install}/var
+cp -vrfu /usr/ ${install}/usr
+cp -vrfu /bin/ ${install}/bin 
+cp -vrfu /etc/ ${install}/etc
+cp -vrfu /lib/ ${install}/lib
+cp -vrfu /libexec/ ${install}/libexec
+cp -vrfu /media/ ${install}/media 
+cp -vrfu /root/ ${install}/root
+cp -vrfu /sbin/ ${install}/sbin 
+cp -vrfu /sys/ ${install}/sys 
+cp -vrfu /usr/ ${install}/usr
+cp -vrfu /bin/ ${install}/bin 
+cp -vrfu /var/ ${install}/var
 
 
 

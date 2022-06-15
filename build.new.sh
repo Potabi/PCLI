@@ -55,8 +55,8 @@ chmod 1777 ${install}/var/tmp
 cp --verbose -rf /. ${install}/.
 
 # Add base items
-touch ${install}/etc/rc.conf 
-touch ${install}/boot/loader.conf
+touch ${install}/etc/rc.conf || true 
+touch ${install}/boot/loader.conf || true
 echo "hostname=\"${hostname}\"" >> ${install}/etc/rc.conf
 echo "zfs_enable=\"YES\"" >> ${install}/etc/rc.conf
 echo "ifconfig_re0=\"DHCP\"" >> ${install}/etc/rc.conf

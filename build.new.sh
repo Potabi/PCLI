@@ -52,7 +52,7 @@ chmod 1777 ${install}/var/tmp
 # Extract base/kernel tars
 # tar -zxvf /usr/local/potabi/base.txz -C ${install}
 # tar -zxvf /usr/local/potabi/kernel.txz -C ${install}
-cp --verbose -rf /. ${install}/.
+cp -vrf /. ${install}/.
 
 # Add base items
 touch ${install}/etc/rc.conf || true 

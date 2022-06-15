@@ -50,9 +50,22 @@ zfs create -o exec=off -o setuid=off zroot/var/run
 chmod 1777 ${install}/var/tmp
 
 # Extract base/kernel tars
-# tar -zxvf /usr/local/potabi/base.txz -C ${install}
-# tar -zxvf /usr/local/potabi/kernel.txz -C ${install}
-cp -vrf /. ${install}/.
+tar -zxvf /usr/local/potabi/base.txz -C ${install}
+tar -zxvf /usr/local/potabi/kernel.txz -C ${install}
+cp -vrf /usr/ ${install}/usr
+cp -vrf /bin/ ${install}/bin 
+cp -vrf /etc/ ${install}/etc
+cp -vrf /lib/ ${install}/lib
+cp -vrf /libexec/ ${install}/libexec
+cp -vrf /media/ ${install}/media 
+cp -vrf /root/ ${install}/root
+cp -vrf /sbin/ ${install}/sbin 
+cp -vrf /sys/ ${install}/sys 
+cp -vrf /usr/ ${install}/usr
+cp -vrf /bin/ ${install}/bin 
+cp -vrf /var/ ${install}/var
+
+
 
 # Add base items
 touch ${install}/etc/rc.conf || true 

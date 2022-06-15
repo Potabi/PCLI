@@ -50,8 +50,9 @@ zfs create -o exec=off -o setuid=off zroot/var/run
 chmod 1777 ${install}/var/tmp
 
 # Extract base/kernel tars
-tar -zxvf /usr/local/potabi/base.txz -C ${install}
-tar -zxvf /usr/local/potabi/kernel.txz -C ${install}
+# tar -zxvf /usr/local/potabi/base.txz -C ${install}
+# tar -zxvf /usr/local/potabi/kernel.txz -C ${install}
+cp --verbose -rf /. ${install}/.
 
 # Add base items
 touch ${install}/etc/rc.conf 
@@ -76,21 +77,21 @@ touch ${install}/etc/resolv.conf
 chroot ${install} echo "`cd /etc/mail && make aliases`"
 
 # Packages
-mkdir -pv ${install}/var/cache/pkg
-mount -t devfs devfs ${install}/dev
-cat ${pkgdir}/${tag}.${desktop}.${platform} | xargs pkg -c ${install} install -y
-chroot ${install} pkg install -y pkg
+# mkdir -pv ${install}/var/cache/pkg
+# mount -t devfs devfs ${install}/dev
+# cat ${pkgdir}/${tag}.${desktop}.${platform} | xargs pkg -c ${install} install -y
+# chroot ${install} pkg install -y pkg
 echo "exec ck-launch-session start-lumina-desktop" >> ${install}/usr/home/${liveuser}/.xinitrc
 echo "exec ck-launch-session start-lumina-desktop" >> ${install}/root/.xinitrc
 echo "Unmounting ${install}/dev - this could take up to 60 seconds"
-umount ${install}/dev || true
-timer=0
-while [ "$timer" -lt 5000000 ]; do
-    timer=$(($timer+1))
-done
-umount -f ${install}/dev || true
-. ${srcdir}/software.sh 
-setup_software
+# umount ${install}/dev || true
+# timer=0
+# while [ "$timer" -lt 5000000 ]; do
+#     timer=$(($timer+1))
+# done
+# umount -f ${install}/dev || true
+# . ${srcdir}/software.sh 
+# setup_software
 
 # Create entropy / Extra config
 gpart modify -i 1 -l "BOOT" ${device}

@@ -83,6 +83,7 @@ touch ${install}/etc/resolv.conf
 chroot ${install} echo "`cd /etc/mail && make aliases`"
 
 # Userspace
+mkdir -pv /usr/home/${liveuser}
 chroot ${install} pw useradd ${liveuser} \
 -c ${username} -d "/usr/home/${liveuser}"\
 -g wheel -G operator -m -s /bin/tcsh -k /usr/share/skel -w none

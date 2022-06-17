@@ -52,18 +52,17 @@ chmod 1777 ${install}/var/tmp
 # Extract base/kernel tars
 tar -zxvf /usr/local/potabi/base.txz -C ${install}
 tar -zxvf /usr/local/potabi/kernel.txz -C ${install}
-cp -vrfn /bin/ ${install}/bin 
-cp -vrfn /boot/ ${install}/boot
-cp -vrfn /usr/ ${install}/usr
-cp -vrfn /etc/ ${install}/etc
-cp -vrfn /lib/ ${install}/lib
-cp -vrfn /libexec/ ${install}/libexec
-cp -vrfn /media/ ${install}/media 
-cp -vrfn /root/ ${install}/root
-cp -vrfn /sbin/ ${install}/sbin 
-cp -vrfn /sys/ ${install}/sys 
-cp -vrfn /usr/ ${install}/usr
-cp -vrfn /var/ ${install}/var
+cp -vrf /bin/ ${install}/bin 
+cp -vrf /boot/ ${install}/boot
+cp -vrf /usr/ ${install}/usr
+cp -vrf /etc/ ${install}/etc
+cp -vrf /lib/ ${install}/lib
+cp -vrf /libexec/ ${install}/libexec
+cp -vrf /media/ ${install}/media 
+cp -vrf /root/ ${install}/root
+cp -vrf /sbin/ ${install}/sbin 
+cp -vrf /sys/ ${install}/sys 
+cp -vrf /var/ ${install}/var
 
 # Add base items
 touch ${install}/etc/rc.conf || true

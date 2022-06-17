@@ -91,6 +91,7 @@ chroot ${install} echo "`cd /etc/mail && make aliases`"
 # mount -t devfs devfs ${install}/dev
 # cat ${pkgdir}/${tag}.${desktop}.${platform} | xargs pkg -c ${install} install -y
 # chroot ${install} pkg install -y pkg
+mkdir -pv ${install}/usr/home/${liveuser}
 echo "exec ck-launch-session start-lumina-desktop" >> ${install}/usr/home/${liveuser}/.xinitrc
 echo "exec ck-launch-session start-lumina-desktop" >> ${install}/root/.xinitrc
 echo "Unmounting ${install}/dev - this could take up to 60 seconds"

@@ -52,8 +52,9 @@ chmod 1777 ${install}/var/tmp
 # Extract base/kernel tars
 tar -zxvf /usr/local/potabi/base.txz -C ${install}
 tar -zxvf /usr/local/potabi/kernel.txz -C ${install}
-cp -vrfn /usr/ ${install}/usr
 cp -vrfn /bin/ ${install}/bin 
+cp -vrfn /boot/ ${install}/boot
+cp -vrfn /usr/ ${install}/usr
 cp -vrfn /etc/ ${install}/etc
 cp -vrfn /lib/ ${install}/lib
 cp -vrfn /libexec/ ${install}/libexec
@@ -62,18 +63,15 @@ cp -vrfn /root/ ${install}/root
 cp -vrfn /sbin/ ${install}/sbin 
 cp -vrfn /sys/ ${install}/sys 
 cp -vrfn /usr/ ${install}/usr
-cp -vrfn /bin/ ${install}/bin 
 cp -vrfn /var/ ${install}/var
 
-
-
 # Add base items
-touch ${install}/etc/rc.conf || true 
-touch ${install}/boot/loader.conf || true
-echo "hostname=\"${hostname}\"" >> ${install}/etc/rc.conf
-echo "zfs_enable=\"YES\"" >> ${install}/etc/rc.conf
-echo "ifconfig_re0=\"DHCP\"" >> ${install}/etc/rc.conf
-echo "sendmail_enable=\"NONE\"" >> ${install}/etc/rc.conf
+touch ${install}/etc/rc.conf || true
+touch ${install}/boot/loader.conf || true 
+# echo "hostname=\"${hostname}\"" >> ${install}/etc/rc.conf
+# echo "zfs_enable=\"YES\"" >> ${install}/etc/rc.conf
+# echo "ifconfig_re0=\"DHCP\"" >> ${install}/etc/rc.conf
+# echo "sendmail_enable=\"NONE\"" >> ${install}/etc/rc.conf
 echo "opensolaris_load=\"YES\"" >> ${install}/boot/loader.conf
 echo "zfs_load=\"YES\"" >> ${install}/boot/loader.conf
 echo "zfs.root.mountfrom=\"zfs:gpt/POTABI\"" >> ${install}/boot/loader.conf

@@ -9,10 +9,6 @@
 set -e # Kill on error
 
 # Temporary configs
-export device="ada0"
-export devdrive="/dev/${device}"
-export install="/tmp/pool"
-export hostname="experimental"
 
 export cwd="`realpath | sed 's|/scripts||g'`"
 
@@ -112,5 +108,8 @@ zfs set mountpoint=/var zroot/var
 # Final steps
 zpool import -f -o cachefile=/tmp/zpool.cache -o altroot=${install} zroot || true
 cp /tmp/zpool.cache ${install}/boot/zfs/zpool.cache || true
+echo "############################################################"
+echo "Install Completed!"
+echo "############################################################"
 zpool export zroot
 zpool import zroot

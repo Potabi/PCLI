@@ -83,7 +83,7 @@ touch ${install}/etc/resolv.conf
 chroot ${install} echo "`cd /etc/mail && make aliases`"
 
 # Userspace
-chroot ${release} pw useradd ${liveuser} \
+chroot ${install} pw useradd ${liveuser} \
 -c ${username} -d "/usr/home/${liveuser}"\
 -g wheel -G operator -m -s /bin/tcsh -k /usr/share/skel -w none
 sed -i '' "s@#greeter-session=example-gtk-gnome@greeter-session=slick-greeter@" ${release}/usr/local/etc/lightdm/lightdm.conf

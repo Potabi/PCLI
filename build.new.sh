@@ -12,8 +12,8 @@ set -e # Kill on error
 
 export cwd="`realpath | sed 's|/scripts||g'`"
 
-. ${cwd}/conf/build.conf
-. ${cwd}/conf/general.conf
+# . ${cwd}/conf/build.conf
+# . ${cwd}/conf/general.conf
 . ${cwd}/conf/install.conf
 
 # Replace existing drive
